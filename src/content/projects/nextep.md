@@ -6,6 +6,7 @@ category: web
 tech: [Next.js, Go, AWS Lambda, PostgreSQL, Redis, Web Push, PWA]
 links:
   demo: https://www.nexteptv.com
+cover: /media/nextep.webp
 featured: true
 order: 1
 ---

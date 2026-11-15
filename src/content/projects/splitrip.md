@@ -6,6 +6,7 @@ category: web
 tech: [React, Vite, Go, AWS Lambda, PostgreSQL, Cloudflare Pages, PWA]
 links:
   demo: https://splitrip.dev
+cover: /media/splitrip.webp
 featured: true
 order: 2
 ---
