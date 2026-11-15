@@ -23,8 +23,8 @@ const buttonClass =
 <Base title={title} description={summary}>
   <article>
     <p class="text-sm tracking-wide text-slate-600 uppercase dark:text-slate-400">
-      <a href="/progetti" class="hover:text-accent dark:hover:text-accent-light">Progetti</a> ·
-      {CATEGORIES[category]}
+      <a href="/progetti" class="hover:text-accent dark:hover:text-accent-light">Progetti</a>
+      {' · '}{CATEGORIES[category]}
       {status === 'in-sviluppo' && ' · In sviluppo'}
       {draft && ' · Bozza'}
     </p>
