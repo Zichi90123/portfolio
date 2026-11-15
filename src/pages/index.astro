@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { LINKS, SITE } from '../consts';
+import { getProjects } from '../lib/projects';
+
+const projects = await getProjects();
+const featured = projects.filter((p) => p.data.featured).slice(0, 3);
+const linkClass =
+  'rounded-lg border border-slate-300 px-4 py-2 font-medium hover:border-slate-500 dark:border-slate-700 dark:hover:border-slate-500';
+---
+
+<Base>
+  <section class="py-6">
+    <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl dark:text-white">
+      {SITE.name}
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg">{SITE.tagline}</p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href="/progetti" class="bg-accent rounded-lg px-4 py-2 font-medium text-white hover:opacity-90"
+        >Vedi i progetti</a
+      >
+      <a href={LINKS.github} class={linkClass}>GitHub</a>
+      {LINKS.linkedin && <a href={LINKS.linkedin} class={linkClass}>LinkedIn</a>}
+      {LINKS.cv && <a href={LINKS.cv} class={linkClass}>CV (PDF)</a>}
+    </div>
+  </section>
+
+  <section class="mt-12" aria-labelledby="in-evidenza">
+    <h2 id="in-evidenza" class="text-2xl font-semibold text-slate-900 dark:text-white">
+      In evidenza
+    </h2>
+    {
+      featured.length > 0 ? (
+        <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      ) : (
+        <p class="mt-4">Le prime schede dei progetti sono in preparazione.</p>
+      )
+    }
+  </section>
+</Base>

@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { LINKS } from '../consts';
+---
+
+<Base title="Chi sono" description="Percorso, competenze e cosa sto imparando.">
+  <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Chi sono</h1>
+  <!-- BOZZA (SP-105): percorso, competenze per livello, cosa sto imparando, CV in PDF. -->
+  <p class="mt-6 max-w-2xl">
+    Questa pagina è in preparazione: presto qui percorso, competenze e il CV in PDF.
+  </p>
+  <p class="mt-4">
+    Nel frattempo il codice dei progetti è su
+    <a href={LINKS.github} class="text-accent dark:text-accent-light underline">GitHub</a>.
+  </p>
+</Base>

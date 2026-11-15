@@ -1,0 +1,78 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { CATEGORIES } from '../../consts';
+import { getProjects, type Project } from '../../lib/projects';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({ params: { id: project.id }, props: { project } }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { title, summary, status, category, tech, links, video, cover, draft } = project.data;
+const { Content } = await render(project);
+const buttonClass =
+  'rounded-lg border border-slate-300 px-4 py-2 font-medium hover:border-slate-500 dark:border-slate-700 dark:hover:border-slate-500';
+---
+
+<Base title={title} description={summary}>
+  <article>
+    <p class="text-sm tracking-wide text-slate-600 uppercase dark:text-slate-400">
+      <a href="/progetti" class="hover:text-accent dark:hover:text-accent-light">Progetti</a> ·
+      {CATEGORIES[category]}
+      {status === 'in-sviluppo' && ' · In sviluppo'}
+      {draft && ' · Bozza'}
+    </p>
+    <h1 class="mt-2 text-3xl font-bold text-slate-900 dark:text-white">{title}</h1>
+    <p class="mt-3 text-lg">{summary}</p>
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      {
+        links.demo && (
+          <a href={links.demo} class="bg-accent rounded-lg px-4 py-2 font-medium text-white hover:opacity-90">
+            Prova la demo
+          </a>
+        )
+      }
+      {links.code && <a href={links.code} class={buttonClass}>Codice</a>}
+      {links.article && <a href={links.article} class={buttonClass}>Articolo</a>}
+    </div>
+
+    {
+      video ? (
+        <video
+          class="mt-8 w-full rounded-xl border border-slate-200 dark:border-slate-800"
+          src={video}
+          poster={cover}
+          controls
+          muted
+          playsinline
+          preload="metadata"
+        />
+      ) : (
+        cover && (
+          <img
+            src={cover}
+            alt={`Schermata di ${title}`}
+            class="mt-8 w-full rounded-xl border border-slate-200 dark:border-slate-800"
+          />
+        )
+      )
+    }
+
+    <ul class="mt-6 flex flex-wrap gap-1.5" aria-label="Tecnologie">
+      {tech.map((t) => <li class="rounded bg-slate-100 px-2 py-0.5 text-sm dark:bg-slate-800">{t}</li>)}
+    </ul>
+
+    <div
+      class="mt-8 max-w-none space-y-4 leading-relaxed [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-slate-900 dark:[&_h2]:text-white [&_li]:ml-5 [&_ul]:list-disc"
+    >
+      <Content />
+    </div>
+  </article>
+</Base>

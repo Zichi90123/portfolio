@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+
+/* Dark mode follows the .dark class set on <html> by the inline script in Base.astro. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --color-accent: oklch(0.55 0.15 255);
+  --color-accent-light: oklch(0.75 0.12 255);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}

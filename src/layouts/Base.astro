@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import { LINKS, NAV, SITE } from '../consts';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = SITE.description } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} — Portfolio`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)" />
+    <!-- Applies the saved or system theme before first paint (no flash). -->
+    <script is:inline>
+      (() => {
+        let saved = null;
+        try {
+          saved = localStorage.getItem('theme');
+        } catch {}
+        const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', dark);
+      })();
+    </script>
+  </head>
+  <body
+    class="flex min-h-dvh flex-col bg-white font-sans text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-200"
+  >
+    <a
+      href="#contenuto"
+      class="sr-only rounded bg-slate-900 px-3 py-2 text-white focus:not-sr-only focus:absolute focus:top-2 focus:left-2"
+      >Vai al contenuto</a
+    >
+    <header class="border-b border-slate-200 dark:border-slate-800">
+      <nav
+        aria-label="Principale"
+        class="mx-auto flex max-w-4xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-4"
+      >
+        <a href="/" class="mr-auto font-semibold text-slate-900 dark:text-white">{SITE.name}</a>
+        <ul class="flex gap-5 text-sm">
+          {
+            NAV.map(({ href, label }) => (
+              <li>
+                <a
+                  href={href}
+                  aria-current={isCurrent(href) ? 'page' : undefined}
+                  class="hover:text-accent aria-[current=page]:text-accent dark:hover:text-accent-light dark:aria-[current=page]:text-accent-light"
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <ThemeToggle />
+      </nav>
+    </header>
+
+    <main id="contenuto" class="mx-auto w-full max-w-4xl flex-1 px-4 py-10">
+      <slot />
+    </main>
+
+    <footer class="border-t border-slate-200 text-sm dark:border-slate-800">
+      <div class="mx-auto flex max-w-4xl flex-wrap gap-x-6 gap-y-2 px-4 py-6">
+        <span>© {new Date().getFullYear()} {SITE.name}</span>
+        <a href={LINKS.github} class="hover:text-accent dark:hover:text-accent-light">GitHub</a>
+        {
+          LINKS.linkedin && (
+            <a href={LINKS.linkedin} class="hover:text-accent dark:hover:text-accent-light">
+              LinkedIn
+            </a>
+          )
+        }
+      </div>
+    </footer>
+  </body>
+</html>

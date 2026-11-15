@@ -1,0 +1,56 @@
+---
+import { CATEGORIES } from '../consts';
+import type { Project } from '../lib/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { title, summary, status, category, tech, cover, draft } = project.data;
+---
+
+<article
+  data-category={category}
+  data-tech={tech.join('|')}
+  class="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 transition hover:border-slate-400 dark:border-slate-800 dark:hover:border-slate-600"
+>
+  {
+    cover ? (
+      <img
+        src={cover}
+        alt=""
+        width="640"
+        height="360"
+        loading="lazy"
+        decoding="async"
+        class="aspect-video w-full object-cover"
+      />
+    ) : (
+      <div
+        aria-hidden="true"
+        class="flex aspect-video items-center justify-center bg-slate-100 text-3xl font-semibold text-slate-400 dark:bg-slate-900 dark:text-slate-600"
+      >
+        {title.slice(0, 1)}
+      </div>
+    )
+  }
+  <div class="flex flex-1 flex-col gap-2 p-4">
+    <p class="text-xs tracking-wide text-slate-600 uppercase dark:text-slate-400">
+      {CATEGORIES[category]}
+      {status === 'in-sviluppo' && ' · In sviluppo'}
+      {draft && ' · Bozza'}
+    </p>
+    <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+      <a href={`/progetti/${project.id}`} class="after:absolute after:inset-0">{title}</a>
+    </h3>
+    <p class="text-sm">{summary}</p>
+    <ul class="mt-auto flex flex-wrap gap-1.5 pt-2" aria-label="Tecnologie">
+      {
+        tech.map((t) => (
+          <li class="rounded bg-slate-100 px-2 py-0.5 text-xs dark:bg-slate-800">{t}</li>
+        ))
+      }
+    </ul>
+  </div>
+</article>
