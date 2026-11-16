@@ -12,10 +12,9 @@ export const SITE = {
 export const LINKS = {
   github: 'https://github.com/Zichi90123',
   linkedin: 'https://www.linkedin.com/in/andrea-zichittella-a52544149/' as string | null,
-  // Contact email: not published until Andrea decides.
-  email: null as string | null,
-  // SP-105: the PDF goes in public/cv.pdf.
-  cv: null as string | null,
+  email: 'andrea.zichittella@gmail.com' as string | null,
+  // Cleaned copy of the CV: no phone, home address or date of birth; clients anonymized.
+  cv: '/cv.pdf' as string | null,
 } as const;
 
 export const NAV = [

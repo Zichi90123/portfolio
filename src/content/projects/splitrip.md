@@ -7,6 +7,7 @@ tech: [React, Vite, Go, AWS Lambda, PostgreSQL, Cloudflare Pages, PWA]
 links:
   demo: https://splitrip.dev
 cover: /media/splitrip.webp
+video: /media/splitrip.mp4
 featured: true
 order: 2
 ---
@@ -53,4 +54,3 @@ ha speso davvero né chi deve cosa a chi.
   l'altro l'importo.
 - Genererei i tipi del frontend da un contratto OpenAPI invece di scriverli a mano.
 
-<!-- Video di 15–30 s (SP-104). -->
