@@ -33,4 +33,18 @@ su quale servizio si guarda.
 - **Deploy da GitHub Actions** con OIDC verso AWS: test, migrazioni, Lambda e Vercel, senza chiavi
   statiche.
 
-<!-- BOZZA: difficoltà incontrate e "cosa farei diversamente" (da scrivere). Video di 15–30 s (SP-104). -->
+## Difficoltà
+
+- **Il cuore dell'app è una query.** Il prossimo episodio da vedere deve tenere conto di speciali, episodi
+  senza data, stagioni non contigue e fusi orari. Con SQL esplicito (sqlc, niente ORM) una sola query lo
+  calcola per tutte le serie dell'utente: 36 ms con 200 serie e 14.400 episodi, con test sui casi limite.
+- **Un'API pubblica che deve restare privata.** La Lambda ha un indirizzo raggiungibile da chiunque, che
+  avrebbe permesso di scavalcare il frontend e i limiti per IP. Il proxy di Next aggiunge a ogni richiesta
+  un segreto condiviso e l'API rifiuta tutte le altre.
+- **I limiti di TMDB.** Le risposte restano in cache su Redis per un giorno, una settimana per i dati che
+  non cambiano più, e fino a 30 giorni come riserva se TMDB non risponde.
+- **Rilasci senza interruzioni.** Le migrazioni girano prima del codice nuovo e devono funzionare anche con
+  quello vecchio; il frontend arriva sempre dopo l'API che gli serve.
+
+<!-- DA SCRIVERE: "cosa farei diversamente" (non ricavabile dalle note del progetto). -->
+<!-- Video di 15–30 s (SP-104). -->

@@ -33,4 +33,24 @@ ha speso davvero né chi deve cosa a chi.
 - **Privacy**: export di tutti i propri dati in JSON ed eliminazione dell'account; nei viaggi di gruppo
   l'utente eliminato resta anonimo perché i conti degli altri tornino.
 
-<!-- BOZZA: difficoltà incontrate e "cosa farei diversamente" (da scrivere). Video di 15–30 s (SP-104). -->
+## Difficoltà
+
+- **Offline davvero.** Una spesa registrata senza rete resta in coda nel browser e parte al ritorno della
+  connessione. Ma il browser può cancellare quella memoria quando manca spazio, e Safari lo fa dopo pochi
+  giorni se l'app non è installata: l'app chiede la memoria persistente alla prima spesa in coda.
+- **Conflitti tra membri del gruppo.** Se due persone cambiano la stessa spesa, una offline e una online,
+  l'app mostra entrambe le versioni e fa scegliere, invece di sovrascrivere in silenzio.
+- **Stessi conti in due linguaggi.** Divisione e saldi sono calcolati sia in Go (API) sia in TypeScript
+  (anteprima offline): un set di casi di test condiviso, eseguito da entrambe le suite, li tiene allineati.
+- **Zero euro al mese.** Tutto sta nei piani gratuiti, con un tetto alla concorrenza della Lambda come
+  limite ai costi.
+
+## Cosa farei diversamente
+
+- Metterei subito i test end-to-end nel repository. All'inizio ho provato i flussi con script Puppeteer
+  usa e getta; oggi sono otto flussi Playwright in CI e il deploy parte solo se passano.
+- Unirei i conflitti campo per campo: oggi si chiede di scegliere anche quando uno ha cambiato la nota e
+  l'altro l'importo.
+- Genererei i tipi del frontend da un contratto OpenAPI invece di scriverli a mano.
+
+<!-- Video di 15–30 s (SP-104). -->

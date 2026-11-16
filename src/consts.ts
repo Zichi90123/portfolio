@@ -1,18 +1,18 @@
-// Site-wide data. Texts marked BOZZA are placeholders to be rewritten by Andrea.
+// Site-wide data.
 
 export const SITE = {
   name: 'Andrea Zichittella',
-  // BOZZA: one sentence on who I am and what I am looking for (PRD: "capire in 10 secondi").
-  tagline: 'Sviluppatore full stack. Costruisco side project completi, dal PRD al rilascio, a costo zero.',
+  tagline:
+    'Senior full stack engineer a Torino. Dal 2017 costruisco piattaforme web e mobile per banche, software house e grandi aziende; qui trovi i progetti che porto avanti da solo, dall’idea al rilascio.',
   description:
-    'Portfolio di Andrea Zichittella: progetti web, mobile e giochi, con le scelte tecniche dietro ognuno.',
+    'Andrea Zichittella, senior full stack engineer a Torino: progetti web e mobile con le scelte tecniche dietro ognuno.',
   lang: 'it',
 } as const;
 
 export const LINKS = {
   github: 'https://github.com/Zichi90123',
-  // TODO: LinkedIn profile URL and contact email (not published until Andrea decides).
-  linkedin: null as string | null,
+  linkedin: 'https://www.linkedin.com/in/andrea-zichittella-a52544149/' as string | null,
+  // Contact email: not published until Andrea decides.
   email: null as string | null,
   // SP-105: the PDF goes in public/cv.pdf.
   cv: null as string | null,
