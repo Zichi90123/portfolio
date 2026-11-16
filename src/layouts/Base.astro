@@ -91,6 +91,13 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
             </a>
           )
         }
+        {
+          LINKS.email && (
+            <a href={`mailto:${LINKS.email}`} class="hover:text-accent dark:hover:text-accent-light">
+              Email
+            </a>
+          )
+        }
       </div>
     </footer>
   </body>
