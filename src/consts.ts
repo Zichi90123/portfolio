@@ -1,16 +1,16 @@
-// Site-wide data. Texts marked BOZZA are placeholders to be rewritten by Andrea.
+// Site-wide data.
 
 export const SITE = {
-  name: 'Andrea Zichittella',
-  // BOZZA: one sentence on who I am and what I am looking for (PRD: "capire in 10 secondi").
-  tagline: 'Sviluppatore full stack. Costruisco side project completi, dal PRD al rilascio, a costo zero.',
+  name: "Andrea Zichittella",
+  tagline:
+    "Senior full stack engineer a Torino. Dal 2017 costruisco piattaforme web e mobile per aziende come Intesa Sanpaolo e TeamSystem; qui trovi i progetti che porto avanti da solo, dall’idea al rilascio.",
   description:
-    'Portfolio di Andrea Zichittella: progetti web, mobile e giochi, con le scelte tecniche dietro ognuno.',
-  lang: 'it',
+    "Andrea Zichittella, senior full stack engineer a Torino: progetti web e mobile con le scelte tecniche dietro ognuno.",
+  lang: "it",
 } as const;
 
 export const LINKS = {
-  github: 'https://github.com/Zichi90123',
+  github: "https://github.com/Zichi90123",
   // TODO: LinkedIn profile URL and contact email (not published until Andrea decides).
   linkedin: null as string | null,
   email: null as string | null,
@@ -19,16 +19,16 @@ export const LINKS = {
 } as const;
 
 export const NAV = [
-  { href: '/', label: 'Home' },
-  { href: '/progetti', label: 'Progetti' },
-  { href: '/chi-sono', label: 'Chi sono' },
+  { href: "/", label: "Home" },
+  { href: "/progetti", label: "Progetti" },
+  { href: "/chi-sono", label: "Chi sono" },
 ] as const;
 
 export const CATEGORIES = {
-  web: 'Web',
-  mobile: 'Mobile',
-  giochi: 'Giochi',
-  strumenti: 'Strumenti',
+  web: "Web",
+  mobile: "Mobile",
+  giochi: "Giochi",
+  strumenti: "Strumenti",
 } as const;
 
 export type Category = keyof typeof CATEGORIES;
