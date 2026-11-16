@@ -44,6 +44,7 @@ fallisce. Finché non li ha, resta `draft: true`.
 
 - **CI** (GitHub Actions): build con `astro check`, link interni rotti (lychee), Lighthouse con soglia 95
   su prestazioni, accessibilità, best practice e SEO.
-- **Deploy**: integrazione Git di Cloudflare Pages: `main` va in produzione, ogni altro branch ha la sua
-  anteprima. Impostazioni del progetto Pages: build command `npm run build`, output `dist`,
-  variabile `NODE_VERSION=24`.
+- **Deploy** su Cloudflare Pages dalla stessa CI, solo se tutti i controlli passano: un push su `main` va
+  in produzione, ogni pull request ha la sua anteprima. Servono il segreto `CLOUDFLARE_API_TOKEN` (token
+  con il solo permesso *Account → Cloudflare Pages → Edit*) e la variabile `CLOUDFLARE_ACCOUNT_ID`.
+  Il progetto Pages `portfolio` viene creato dal primo deploy se non esiste.
