@@ -1,12 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
+import { ROUTES } from '../i18n';
+
+const link = 'text-accent dark:text-accent-light underline';
 ---
 
-<Base title="Pagina non trovata">
+<!-- One 404 page for both languages: Pages serves 404.html for every missing path. -->
+<Base title="Pagina non trovata · Page not found">
   <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Pagina non trovata</h1>
   <p class="mt-4">
-    La pagina che cerchi non esiste. Torna alla <a href="/" class="text-accent dark:text-accent-light underline"
-      >home</a
-    > o guarda i <a href="/progetti" class="text-accent dark:text-accent-light underline">progetti</a>.
+    La pagina che cerchi non esiste. Torna alla <a href={ROUTES.home.it} class={link}>home</a> o guarda i
+    <a href={ROUTES.projects.it} class={link}>progetti</a>.
+  </p>
+  <p class="mt-6" lang="en">
+    <strong>Page not found.</strong> Go to the <a href={ROUTES.home.en} class={link}>English home page</a> or
+    the <a href={ROUTES.projects.en} class={link}>projects</a>.
   </p>
 </Base>

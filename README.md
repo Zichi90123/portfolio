@@ -40,6 +40,16 @@ draft: false # true = visibile solo in `npm run dev`
 Regola del PRD: un progetto pubblicato deve avere una demo (`links.demo`) o un video, altrimenti la build
 fallisce. Finché non li ha, resta `draft: true`.
 
+## Italiano e inglese
+
+L'italiano è la lingua principale; l'inglese sta sotto `/en` (`/en/projects`, `/en/about`).
+
+- Testi dell'interfaccia: `src/i18n.ts`. Pagina Chi sono: `src/data/about.ts`.
+- Le pagine sono in `src/views/` con la lingua come parametro; `src/pages/` e `src/pages/en/` le usano.
+- Traduzione di una scheda: un file con lo stesso nome in `src/content/projects-en/`, solo con `summary`,
+  eventualmente `title` e `demo`, e il testo. Il resto (media, link, tecnologie) viene dal file italiano.
+  Senza traduzione la pagina inglese mostra il testo italiano con un avviso.
+
 ## CI e rilascio
 
 - **CI** (GitHub Actions): build con `astro check`, link interni rotti (lychee), Lighthouse con soglia 95
