@@ -5,7 +5,7 @@ status: in-sviluppo
 category: strumenti
 tech: [TypeScript, React, Cloudflare Workers, Hono, D1, Web Crypto]
 featured: true
-order: 3
+order: 4
 # Not deployed yet (SP-112): stays a draft until there is a demo or a video.
 draft: true
 ---
