@@ -10,6 +10,11 @@ export default defineConfig({
   trailingSlash: 'never',
   build: { format: 'file' },
   integrations: [sitemap()],
+  // Code highlighting at build time (no JavaScript in the browser), light and dark themes:
+  // the dark one is switched on by the .dark class in global.css.
+  markdown: {
+    shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' }, defaultColor: 'light' },
+  },
   vite: {
     plugins: [tailwindcss()],
   },

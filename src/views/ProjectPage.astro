@@ -1,7 +1,8 @@
 ---
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { projectPath, ROUTES, t, type Lang } from '../i18n';
+import { articlePath, projectPath, ROUTES, t, type Lang } from '../i18n';
+import { getArticles } from '../lib/articles';
 import type { Project } from '../lib/projects';
 
 interface Props {
@@ -15,6 +16,7 @@ const other: Lang = lang === 'it' ? 'en' : 'it';
 const ogImage = lang === 'it' ? `/og/${project.id}.png` : `/og/en/${project.id}.png`;
 const { title, summary, status, category, tech, links, downloads, video, cover, draft } = project.data;
 const { Content } = await render(project.entry);
+const articles = (await getArticles(lang)).filter((a) => a.data.project === project.id);
 const buttonClass =
   'rounded-lg border border-slate-300 px-4 py-2 font-medium hover:border-slate-500 dark:border-slate-700 dark:hover:border-slate-500';
 ---
@@ -62,6 +64,13 @@ const buttonClass =
       }
       {links.code && <a href={links.code} class={buttonClass}>{ui.code}</a>}
       {links.article && <a href={links.article} class={buttonClass}>{ui.article}</a>}
+      {
+        articles.map((a) => (
+          <a href={articlePath(a.id, lang)} class={buttonClass}>
+            {ui.article}: {a.data.title}
+          </a>
+        ))
+      }
     </div>
 
     {
@@ -99,7 +108,7 @@ const buttonClass =
     }
     <div
       lang={project.translated ? undefined : 'it'}
-      class="mt-8 max-w-none space-y-4 leading-relaxed [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-slate-900 dark:[&_h2]:text-white [&_li]:ml-5 [&_ul]:list-disc"
+      class="prose mt-8 max-w-none"
     >
       <Content />
     </div>
