@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, status, category, tech, links, video, cover, draft } = project.data;
+const { title, summary, status, category, tech, links, downloads, video, cover, draft } = project.data;
 const { Content } = await render(project);
 const buttonClass =
   'rounded-lg border border-slate-300 px-4 py-2 font-medium hover:border-slate-500 dark:border-slate-700 dark:hover:border-slate-500';
@@ -38,6 +38,20 @@ const buttonClass =
             Prova la demo
           </a>
         )
+      }
+      {
+        downloads.map((d, i) => (
+          <a
+            href={d.url}
+            class={
+              i === 0 && !links.demo
+                ? 'bg-accent rounded-lg px-4 py-2 font-medium text-white hover:opacity-90'
+                : buttonClass
+            }
+          >
+            Scarica {d.label}
+          </a>
+        ))
       }
       {links.code && <a href={links.code} class={buttonClass}>Codice</a>}
       {links.article && <a href={links.article} class={buttonClass}>Articolo</a>}

@@ -23,6 +23,8 @@ const projects = defineCollection({
           article: z.string().optional(),
         })
         .default({}),
+      // Desktop software: "Scarica <label>" buttons, e.g. to a GitHub release.
+      downloads: z.array(z.object({ label: z.string(), url: z.url() })).default([]),
       // Path under public/, e.g. /media/nextep.webp
       cover: z.string().optional(),
       // Short MP4/WebM demo (15–30 s), path under public/ or absolute URL.
