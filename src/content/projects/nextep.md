@@ -7,6 +7,7 @@ tech: [Next.js, Go, AWS Lambda, PostgreSQL, Redis, Web Push, PWA]
 links:
   demo: https://www.nexteptv.com
 cover: /media/nextep.webp
+video: /media/nextep.mp4
 featured: true
 order: 1
 ---
@@ -46,5 +47,9 @@ su quale servizio si guarda.
 - **Rilasci senza interruzioni.** Le migrazioni girano prima del codice nuovo e devono funzionare anche con
   quello vecchio; il frontend arriva sempre dopo l'API che gli serve.
 
-<!-- DA SCRIVERE: "cosa farei diversamente" (non ricavabile dalle note del progetto). -->
-<!-- Video di 15–30 s (SP-104). -->
+## Cosa farei diversamente
+
+- Chiederei ad AWS fin dall'inizio di far uscire SES dalla sandbox: finché ci resta, le email di recupero
+  password arrivano solo agli indirizzi verificati.
+- Progetterei da subito per la PWA installata: su iPhone le notifiche push arrivano solo con l'app nella
+  schermata Home, e va spiegato all'utente.
