@@ -52,4 +52,26 @@ const projectsEn = defineCollection({
   }),
 });
 
-export const collections = { projects, projectsEn };
+// Technical articles (SP-106), in Italian; English translations in articles-en with the same file name.
+const articles = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().max(220),
+    date: z.coerce.date(),
+    // Id of the related project (file name in src/content/projects).
+    project: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+const articlesEn = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/articles-en' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().max(220),
+  }),
+});
+
+export const collections = { projects, projectsEn, articles, articlesEn };

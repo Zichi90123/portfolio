@@ -40,6 +40,24 @@ draft: false # true = visibile solo in `npm run dev`
 Regola del PRD: un progetto pubblicato deve avere una demo (`links.demo`) o un video, altrimenti la build
 fallisce. Finché non li ha, resta `draft: true`.
 
+## Scrivere un articolo
+
+Un file Markdown in `src/content/articles/` (traduzione con lo stesso nome in `src/content/articles-en/`):
+
+```yaml
+---
+title: "Titolo"
+description: "Una o due frasi, al massimo 220 caratteri."
+date: 2026-11-17
+project: splitrip # facoltativo: l'articolo compare come pulsante nella scheda del progetto
+tags: [PWA, Go]
+draft: false
+---
+```
+
+Il codice si evidenzia in build (Shiki, tema chiaro e scuro); tempo di lettura e feed RSS (`/rss.xml`,
+`/en/rss.xml`) sono automatici.
+
 ## Italiano e inglese
 
 L'italiano è la lingua principale; l'inglese sta sotto `/en` (`/en/projects`, `/en/about`).

@@ -1,0 +1,53 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { articlePath, projectPath, ROUTES, t, type Lang } from '../i18n';
+import { formatDate, type Article } from '../lib/articles';
+import { getProjects } from '../lib/projects';
+
+interface Props {
+  article: Article;
+  lang: Lang;
+}
+
+const { article, lang } = Astro.props;
+const ui = t(lang);
+const other: Lang = lang === 'it' ? 'en' : 'it';
+const { title, description, date, project: projectId } = article.data;
+const { Content } = await render(article.entry);
+const project = projectId ? (await getProjects(lang)).find((p) => p.id === projectId) : undefined;
+const ogImage = lang === 'it' ? `/og/articoli/${article.id}.png` : `/og/en/articles/${article.id}.png`;
+const iso = date.toISOString().slice(0, 10);
+---
+
+<Base lang={lang} title={title} description={description} image={ogImage} alternate={articlePath(article.id, other)}>
+  <meta slot="head" property="article:published_time" content={iso} />
+  <meta slot="head" name="author" content="Andrea Zichittella" />
+  <article>
+    <p class="text-sm tracking-wide text-slate-600 uppercase dark:text-slate-400">
+      <a href={ROUTES.articles[lang]} class="hover:text-accent dark:hover:text-accent-light">{ui.articlesTitle}</a>
+      {' · '}<time datetime={iso}>{formatDate(date, ui.dateLocale)}</time>
+      {' · '}{ui.readingTime(article.minutes)}
+    </p>
+    <h1 class="mt-2 max-w-3xl text-3xl font-bold text-slate-900 sm:text-4xl dark:text-white">{title}</h1>
+    <p class="mt-3 max-w-2xl text-lg">{description}</p>
+    {
+      project && (
+        <p class="mt-4 text-sm">
+          {ui.relatedProject}:{' '}
+          <a href={projectPath(project.id, lang)} class="text-accent dark:text-accent-light underline">
+            {project.data.title}
+          </a>
+        </p>
+      )
+    }
+    {
+      !article.translated && (
+        <p class="mt-8 max-w-2xl rounded-lg bg-slate-100 px-4 py-3 text-sm dark:bg-slate-900">{ui.articleItalianOnly}</p>
+      )
+    }
+    <div lang={article.translated ? undefined : 'it'} class="prose mt-8">
+      <Content />
+    </div>
+  </article>
+</Base>

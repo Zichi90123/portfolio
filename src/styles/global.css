@@ -21,3 +21,102 @@
     outline-offset: 2px;
   }
 }
+
+/* Long-form text from Markdown: project pages and articles. */
+@layer components {
+  .prose {
+    max-width: 42rem;
+    line-height: 1.75;
+  }
+  .prose > * + * {
+    margin-top: 1rem;
+  }
+  .prose h2 {
+    margin-top: 2.25rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-slate-900);
+  }
+  .prose h3 {
+    margin-top: 1.75rem;
+    font-weight: 600;
+    color: var(--color-slate-900);
+  }
+  .prose ul,
+  .prose ol {
+    padding-left: 1.25rem;
+  }
+  .prose ul {
+    list-style: disc;
+  }
+  .prose ol {
+    list-style: decimal;
+  }
+  .prose li + li {
+    margin-top: 0.35rem;
+  }
+  .prose a {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+  .prose strong {
+    color: var(--color-slate-900);
+  }
+  .prose blockquote {
+    border-left: 3px solid var(--color-slate-300);
+    padding-left: 1rem;
+    color: var(--color-slate-600);
+  }
+  .prose :not(pre) > code {
+    border-radius: 0.25rem;
+    background: var(--color-slate-100);
+    padding: 0.1rem 0.3rem;
+    font-size: 0.9em;
+  }
+  .prose pre {
+    overflow-x: auto;
+    border: 1px solid var(--color-slate-200);
+    border-radius: 0.5rem;
+    padding: 0.9rem 1rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .prose th,
+  .prose td {
+    border-bottom: 1px solid var(--color-slate-200);
+    padding: 0.4rem 0.75rem 0.4rem 0;
+    text-align: left;
+  }
+  .dark .prose h2,
+  .dark .prose h3,
+  .dark .prose strong {
+    color: #fff;
+  }
+  .dark .prose a {
+    color: var(--color-accent-light);
+  }
+  .dark .prose blockquote {
+    border-color: var(--color-slate-700);
+    color: var(--color-slate-400);
+  }
+  .dark .prose :not(pre) > code {
+    background: var(--color-slate-800);
+  }
+  .dark .prose pre,
+  .dark .prose th,
+  .dark .prose td {
+    border-color: var(--color-slate-800);
+  }
+  /* Shiki dual themes: switch to the dark colours with the site theme. */
+  .dark .astro-code,
+  .dark .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}

@@ -6,9 +6,12 @@ export const ROUTES = {
   home: { it: '/', en: '/en' },
   projects: { it: '/progetti', en: '/en/projects' },
   about: { it: '/chi-sono', en: '/en/about' },
+  articles: { it: '/articoli', en: '/en/articles' },
+  rss: { it: '/rss.xml', en: '/en/rss.xml' },
 } as const satisfies Record<string, Record<Lang, string>>;
 
 export const projectPath = (id: string, lang: Lang) => `${ROUTES.projects[lang]}/${id}`;
+export const articlePath = (id: string, lang: Lang) => `${ROUTES.articles[lang]}/${id}`;
 
 export const UI = {
   it: {
@@ -16,7 +19,7 @@ export const UI = {
     ogLocale: 'it_IT',
     skip: 'Vai al contenuto',
     navLabel: 'Principale',
-    nav: { home: 'Home', projects: 'Progetti', about: 'Chi sono' },
+    nav: { home: 'Home', projects: 'Progetti', articles: 'Articoli', about: 'Chi sono' },
     switchTo: 'English',
     switchShort: 'EN',
     switchLabel: 'Read this page in English',
@@ -49,13 +52,23 @@ export const UI = {
     italianOnly: '',
     categories: { web: 'Web', mobile: 'Mobile', giochi: 'Giochi', strumenti: 'Strumenti' },
     ogKickerProjects: 'andreazichittella.com · Progetti',
+    ogKickerArticles: 'andreazichittella.com · Articoli',
+    dateLocale: 'it-IT',
+    articlesTitle: 'Articoli',
+    articlesDescription: 'Articoli tecnici sui miei progetti: problemi veri, soluzioni e quello che resta da fare.',
+    noArticles: 'Il primo articolo è in arrivo.',
+    readingTime: (min: number) => `${min} min di lettura`,
+    relatedProject: 'Progetto',
+    rssTitle: 'Andrea Zichittella — Articoli',
+    rssLabel: 'Feed RSS',
+    articleItalianOnly: '',
   },
   en: {
     htmlLang: 'en',
     ogLocale: 'en_US',
     skip: 'Skip to content',
     navLabel: 'Main',
-    nav: { home: 'Home', projects: 'Projects', about: 'About' },
+    nav: { home: 'Home', projects: 'Projects', articles: 'Articles', about: 'About' },
     switchTo: 'Italiano',
     switchShort: 'IT',
     switchLabel: 'Leggi questa pagina in italiano',
@@ -88,6 +101,16 @@ export const UI = {
     italianOnly: 'This page is not translated yet: the text below is in Italian.',
     categories: { web: 'Web', mobile: 'Mobile', giochi: 'Games', strumenti: 'Tools' },
     ogKickerProjects: 'andreazichittella.com · Projects',
+    ogKickerArticles: 'andreazichittella.com · Articles',
+    dateLocale: 'en-GB',
+    articlesTitle: 'Articles',
+    articlesDescription: 'Technical articles about my projects: real problems, solutions and what is left to do.',
+    noArticles: 'The first article is on its way.',
+    readingTime: (min: number) => `${min} min read`,
+    relatedProject: 'Project',
+    rssTitle: 'Andrea Zichittella — Articles',
+    rssLabel: 'RSS feed',
+    articleItalianOnly: 'This article is not translated yet: the text below is in Italian.',
   },
 } as const;
 

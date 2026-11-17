@@ -33,6 +33,7 @@ const home = ROUTES.home[lang];
 const nav = [
   { href: home, label: ui.nav.home },
   { href: ROUTES.projects[lang], label: ui.nav.projects },
+  { href: ROUTES.articles[lang], label: ui.nav.articles },
   { href: ROUTES.about[lang], label: ui.nav.about },
 ];
 const isCurrent = (href: string) => (href === home ? path === home : path.startsWith(href));
@@ -52,6 +53,7 @@ const linkClass = 'hover:text-accent dark:hover:text-accent-light';
     <link rel="alternate" hreflang="x-default" href={hreflang.it} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={ui.rssTitle} href={ROUTES.rss[lang]} />
     <slot name="head" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
