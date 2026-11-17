@@ -1,7 +1,14 @@
+---
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+---
+
 <button
   id="theme-toggle"
   type="button"
-  aria-label="Cambia tema chiaro/scuro"
+  aria-label={label}
   class="rounded-md border border-slate-300 p-1.5 hover:border-slate-500 dark:border-slate-700 dark:hover:border-slate-500"
 >
   <!-- Drawn icons instead of ☾/☀: iOS renders those as colour emoji. -->

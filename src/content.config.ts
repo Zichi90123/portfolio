@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { CATEGORIES, type Category } from './consts';
 
-const categories = Object.keys(CATEGORIES) as [Category, ...Category[]];
+const categories = [...CATEGORIES] as [Category, ...Category[]];
 
 // One Markdown file per project in src/content/projects (SP-103).
 // Adding a project = one .md file (+ media in public/), no code changes.
@@ -40,4 +40,16 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { projects };
+// English translations (SP-108): same file name as the Italian project, only the text.
+// Media, links, tech and order always come from the Italian file.
+const projectsEn = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/projects-en' }),
+  schema: z.object({
+    title: z.string().optional(),
+    summary: z.string().max(160),
+    // Demo in the other language, when the app has one (e.g. WanderWish /it vs /).
+    demo: z.url().optional(),
+  }),
+});
+
+export const collections = { projects, projectsEn };

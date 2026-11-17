@@ -1,0 +1,107 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { projectPath, ROUTES, t, type Lang } from '../i18n';
+import type { Project } from '../lib/projects';
+
+interface Props {
+  project: Project;
+  lang: Lang;
+}
+
+const { project, lang } = Astro.props;
+const ui = t(lang);
+const other: Lang = lang === 'it' ? 'en' : 'it';
+const ogImage = lang === 'it' ? `/og/${project.id}.png` : `/og/en/${project.id}.png`;
+const { title, summary, status, category, tech, links, downloads, video, cover, draft } = project.data;
+const { Content } = await render(project.entry);
+const buttonClass =
+  'rounded-lg border border-slate-300 px-4 py-2 font-medium hover:border-slate-500 dark:border-slate-700 dark:hover:border-slate-500';
+---
+
+<Base
+  lang={lang}
+  title={title}
+  description={summary}
+  image={ogImage}
+  alternate={projectPath(project.id, other)}
+>
+  <article>
+    <p class="text-sm tracking-wide text-slate-600 uppercase dark:text-slate-400">
+      <a href={ROUTES.projects[lang]} class="hover:text-accent dark:hover:text-accent-light"
+        >{ui.projectsTitle}</a
+      >
+      {' · '}{ui.categories[category]}
+      {status === 'in-sviluppo' && ` · ${ui.inDevelopment}`}
+      {draft && ` · ${ui.draft}`}
+    </p>
+    <h1 class="mt-2 text-3xl font-bold text-slate-900 dark:text-white">{title}</h1>
+    <p class="mt-3 text-lg">{summary}</p>
+
+    <div class="mt-6 flex flex-wrap gap-3">
+      {
+        links.demo && (
+          <a href={links.demo} class="bg-accent rounded-lg px-4 py-2 font-medium text-white hover:opacity-90">
+            {ui.tryDemo}
+          </a>
+        )
+      }
+      {
+        downloads.map((d, i) => (
+          <a
+            href={d.url}
+            class={
+              i === 0 && !links.demo
+                ? 'bg-accent rounded-lg px-4 py-2 font-medium text-white hover:opacity-90'
+                : buttonClass
+            }
+          >
+            {ui.download} {d.label}
+          </a>
+        ))
+      }
+      {links.code && <a href={links.code} class={buttonClass}>{ui.code}</a>}
+      {links.article && <a href={links.article} class={buttonClass}>{ui.article}</a>}
+    </div>
+
+    {
+      video ? (
+        <video
+          class="mt-8 w-full rounded-xl border border-slate-200 dark:border-slate-800"
+          src={video}
+          poster={cover}
+          controls
+          muted
+          playsinline
+          preload="metadata"
+        />
+      ) : (
+        cover && (
+          <img
+            src={cover}
+            alt={`${ui.screenshotsOf} ${title}`}
+            width="1280"
+            height="720"
+            class="mt-8 w-full rounded-xl border border-slate-200 dark:border-slate-800"
+          />
+        )
+      )
+    }
+
+    <ul class="mt-6 flex flex-wrap gap-1.5" aria-label={ui.techLabel}>
+      {tech.map((tag) => <li class="rounded bg-slate-100 px-2 py-0.5 text-sm dark:bg-slate-800">{tag}</li>)}
+    </ul>
+
+    {
+      !project.translated && (
+        <p class="mt-8 rounded-lg bg-slate-100 px-4 py-3 text-sm dark:bg-slate-900">{ui.italianOnly}</p>
+      )
+    }
+    <div
+      lang={project.translated ? undefined : 'it'}
+      class="mt-8 max-w-none space-y-4 leading-relaxed [&_h2]:mt-8 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-slate-900 dark:[&_h2]:text-white [&_li]:ml-5 [&_ul]:list-disc"
+    >
+      <Content />
+    </div>
+  </article>
+</Base>

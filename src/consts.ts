@@ -1,33 +1,17 @@
-// Site-wide data.
+// Site-wide data. Texts that change with the language live in src/i18n.ts.
 
 export const SITE = {
   name: 'Andrea Zichittella',
-  tagline:
-    'Senior full stack engineer a Torino. Dal 2017 costruisco piattaforme web e mobile per banche, software house e grandi aziende; qui trovi i progetti che porto avanti da solo, dall’idea al rilascio.',
-  description:
-    'Andrea Zichittella, senior full stack engineer a Torino: progetti web e mobile con le scelte tecniche dietro ognuno.',
-  lang: 'it',
 } as const;
 
 export const LINKS = {
   github: 'https://github.com/Zichi90123',
   linkedin: 'https://www.linkedin.com/in/andrea-zichittella-a52544149/' as string | null,
   email: 'andrea.zichittella@gmail.com' as string | null,
-  // Cleaned copy of the CV: no phone, home address or date of birth; clients anonymized.
+  // Cleaned copy of the CV (in English): no phone, home address or date of birth; clients anonymized.
   cv: '/cv.pdf' as string | null,
 } as const;
 
-export const NAV = [
-  { href: '/', label: 'Home' },
-  { href: '/progetti', label: 'Progetti' },
-  { href: '/chi-sono', label: 'Chi sono' },
-] as const;
-
-export const CATEGORIES = {
-  web: 'Web',
-  mobile: 'Mobile',
-  giochi: 'Giochi',
-  strumenti: 'Strumenti',
-} as const;
-
-export type Category = keyof typeof CATEGORIES;
+// Category keys used in the project files; labels per language are in src/i18n.ts.
+export const CATEGORIES = ['web', 'mobile', 'giochi', 'strumenti'] as const;
+export type Category = (typeof CATEGORIES)[number];

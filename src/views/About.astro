@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import { LINKS } from '../consts';
+import { ABOUT } from '../data/about';
+import { ROUTES, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const a = ABOUT[lang];
+const h2 = 'mt-12 text-xl font-semibold text-slate-900 dark:text-white';
+const muted = 'text-sm text-slate-600 dark:text-slate-400';
+const link = 'text-accent dark:text-accent-light underline';
+---
+
+<Base lang={lang} title={a.title} description={a.description} alternate={ROUTES.about[lang === 'it' ? 'en' : 'it']}>
+  <h1 class="text-3xl font-bold text-slate-900 dark:text-white">{a.title}</h1>
+
+  <div class="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed">
+    <p>{a.intro[0]}</p>
+    <p>
+      {a.intro[1]} <a href={ROUTES.projects[lang]} class={link}>{a.projectsLink}</a>.
+    </p>
+  </div>
+
+  <section aria-labelledby="percorso">
+    <h2 id="percorso" class={h2}>{a.headings.path}</h2>
+    <ol class="mt-6 space-y-8">
+      {
+        a.experience.map((job) => (
+          <li>
+            <p class={muted}>{job.period}</p>
+            <h3 class="mt-1 font-semibold text-slate-900 dark:text-white">
+              {job.role} · {job.company}
+            </h3>
+            <p class="mt-2 max-w-2xl leading-relaxed">{job.intro}</p>
+            {job.projects && (
+              <ul class="mt-4 space-y-4 border-l border-slate-200 pl-4 dark:border-slate-800">
+                {job.projects.map((p) => (
+                  <li>
+                    <p class="font-medium text-slate-900 dark:text-white">
+                      {p.name} <span class={muted}>· {p.period}</span>
+                    </p>
+                    <p class="mt-1 max-w-2xl leading-relaxed">{p.text}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section aria-labelledby="insegnamento">
+    <h2 id="insegnamento" class={h2}>{a.headings.teaching}</h2>
+    <p class="mt-4 max-w-2xl leading-relaxed">{a.teaching}</p>
+  </section>
+
+  <section aria-labelledby="competenze">
+    <h2 id="competenze" class={h2}>{a.headings.skills}</h2>
+    <dl class="mt-4 max-w-2xl space-y-3">
+      {
+        a.skills.map((s) => (
+          <div class="sm:flex sm:gap-4">
+            <dt class="font-medium text-slate-900 sm:w-36 sm:shrink-0 dark:text-white">{s.area}</dt>
+            <dd>{s.items}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section aria-labelledby="formazione">
+    <h2 id="formazione" class={h2}>{a.headings.education}</h2>
+    <ul class="mt-4 max-w-2xl space-y-2">
+      {a.education.map((e) => <li>{e}</li>)}
+    </ul>
+  </section>
+
+  <section aria-labelledby="contatti">
+    <h2 id="contatti" class={h2}>{a.headings.contacts}</h2>
+    <p class="mt-4">
+      {a.contacts.code} <a href={LINKS.github} class={link}>GitHub</a>.
+      {LINKS.linkedin && <> {a.contacts.linkedin} <a href={LINKS.linkedin} class={link}>LinkedIn</a>.</>}
+      {
+        LINKS.email && (
+          <>
+            {' '}
+            {a.contacts.email} <a href={`mailto:${LINKS.email}`} class={link}>{LINKS.email}</a>.
+          </>
+        )
+      }
+      {LINKS.cv && <> {a.contacts.cv} <a href={LINKS.cv} class={link}>PDF</a>.</>}
+    </p>
+  </section>
+</Base>
