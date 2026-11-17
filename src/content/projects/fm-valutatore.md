@@ -50,7 +50,7 @@ i giocatori già osservati.
   interni che usa e, se un aggiornamento ne rompe qualcuno, dice quali funzioni non andranno. Per far
   partire BepInEx su FM26 sono servite due correzioni, ora documentate nell'installazione.
 - **Senza i dati nascosti del gioco.** L'abilità complessiva (CA) è stimata dagli attributi con una formula
-  per reparto misurata su tre salvataggi, circa 17.000 giocatori: correlazione 0,93–0,99, errore medio ±3
+  per reparto misurata su tre salvataggi, circa 170.000 giocatori: correlazione 0,93–0,99, errore medio ±3
   su 200.
 - **Quanto pesare l'abilità rispetto al ruolo.** Confrontato con le medie voto di 5.500 giocatori, la sola
   aderenza al ruolo prevede poco il rendimento (0,15), la sola CA di più (0,33): il 60% di CA tiene quasi

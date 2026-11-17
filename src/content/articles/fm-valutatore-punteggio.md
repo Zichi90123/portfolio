@@ -74,7 +74,7 @@ usano. Senza, il punteggio perderebbe la sua parte più utile.
 
 FM calcola la CA dagli attributi, con pesi che dipendono dalla posizione. Quindi la si può **ricostruire**:
 ho misurato una formula lineare per reparto (un peso per ognuno dei 47 attributi, più una costante) su tre
-salvataggi con la CA visibile, e l'ho verificata da un salvataggio all'altro.
+salvataggi con la CA visibile, circa 170.000 giocatori, e l'ho verificata da un salvataggio all'altro.
 
 ```ts
 // CA = costante + somma(pesi × attributi), con i pesi del reparto del giocatore.

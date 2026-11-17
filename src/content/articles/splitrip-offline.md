@@ -132,14 +132,22 @@ o se c'è già qualcosa in coda.
 
 ## Cosa resta da fare
 
-Due limiti, entrambi annotati nel progetto:
+Un limite, annotato nel progetto:
 
 - **Conflitti campo per campo.** Oggi ogni modifica concorrente chiede di scegliere, anche quando io ho
   cambiato la nota e l'altro l'importo. Avendo già la `base` in coda, si possono unire da soli i campi
   cambiati da una parte sola e chiedere solo per quelli cambiati da entrambi.
-- **Il controllo di versione è un passo separato dall'aggiornamento.** Il server confronta
-  `expected_updated_at` e poi aggiorna: due modifiche arrivate nello stesso istante potrebbero passare
-  entrambe. Spostare la condizione nella `WHERE` dell'`UPDATE` chiuderebbe anche quella finestra.
+
+Un secondo limite l'ho trovato rileggendo il codice per questo articolo, e l'ho chiuso. Il server confrontava
+`expected_updated_at` e poi aggiornava in un passo separato: due modifiche arrivate nello stesso istante
+potevano passare entrambe. Ora la versione fa parte della condizione della scrittura, e se nel frattempo è
+cambiata non si aggiorna nessuna riga:
+
+```sql
+UPDATE expenses SET ..., updated_at = now()
+WHERE id = $1 AND updated_at = $2  -- la versione letta: se è cambiata, nessuna riga e 409
+RETURNING *;
+```
 
 La lezione più utile però è un'altra: **l'offline è soprattutto una questione di errori**. Salvare in
 locale è facile. La parte che richiede progetto è decidere, per ogni risposta possibile del server, se

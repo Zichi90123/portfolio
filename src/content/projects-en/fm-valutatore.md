@@ -39,7 +39,7 @@ already been scouted.
   and members it relies on and, if an update breaks any of them, says which features will not work. Getting
   BepInEx to run on FM26 took two fixes, now documented in the installation guide.
 - **Without the game's hidden data.** Overall ability (CA) is estimated from the attributes with a formula
-  per position group, measured on three saves and about 17,000 players: correlation 0.93–0.99, average error
+  per position group, measured on three saves and about 170,000 players: correlation 0.93–0.99, average error
   ±3 out of 200.
 - **How much ability should weigh against role fit.** Checked against the average match ratings of 5,500
   players, role fit alone barely predicts performance (0.15) and CA alone does better (0.33): 60% CA keeps

@@ -73,7 +73,7 @@ Without it, the score would lose its most useful part.
 
 FM computes CA from the attributes, with weights that depend on the position. So it can be **reconstructed**:
 I measured a linear formula per position group (one weight for each of the 47 attributes, plus a constant) on
-three saves with CA visible, and checked it from one save to another.
+three saves with CA visible, about 170,000 players, and checked it from one save to another.
 
 ```ts
 // CA = constant + sum(weights × attributes), with the weights of the player's position group.

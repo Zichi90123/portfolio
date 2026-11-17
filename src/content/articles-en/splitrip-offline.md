@@ -129,14 +129,22 @@ installed or something is already queued.
 
 ## What is left to do
 
-Two limits, both noted in the project:
+One limit, noted in the project:
 
 - **Field-by-field conflicts.** Today every concurrent change asks you to choose, even when I changed the
   note and the other person the amount. With the `base` already in the queue, fields changed on one side
   only could be merged automatically, asking only about fields changed on both.
-- **The version check is a separate step from the update.** The server compares `expected_updated_at` and
-  then updates: two changes arriving at the very same moment could both go through. Moving the condition into
-  the `WHERE` of the `UPDATE` would close that window too.
+
+I found a second limit while rereading the code for this article, and closed it. The server compared
+`expected_updated_at` and then updated in a separate step: two changes arriving at the very same moment could
+both go through. Now the version is part of the write condition, and if it changed in the meantime no row is
+updated:
+
+```sql
+UPDATE expenses SET ..., updated_at = now()
+WHERE id = $1 AND updated_at = $2  -- the version that was read: if it changed, no row and a 409
+RETURNING *;
+```
 
 The most useful lesson, though, is another one: **offline is mostly about errors**. Saving locally is easy.
 The part that needs design is deciding, for every possible server response, whether to retry, stop, close the
