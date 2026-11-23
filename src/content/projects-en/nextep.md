@@ -36,10 +36,3 @@ next one comes out, and which service it is on.
   up to 30 days as a fallback when TMDB does not answer.
 - **Releases without downtime.** Migrations run before the new code and must also work with the old one;
   the frontend always ships after the API it needs.
-
-## What I would do differently
-
-- I would ask AWS to move SES out of the sandbox from day one: while it stays there, password reset emails
-  only reach verified addresses.
-- I would design for the installed PWA from the start: on iPhone, push notifications only arrive when the
-  app is on the Home Screen, and users need to be told.

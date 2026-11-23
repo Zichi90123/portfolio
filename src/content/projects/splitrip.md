@@ -45,12 +45,3 @@ ha speso davvero né chi deve cosa a chi.
   (anteprima offline): un set di casi di test condiviso, eseguito da entrambe le suite, li tiene allineati.
 - **Zero euro al mese.** Tutto sta nei piani gratuiti, con un tetto alla concorrenza della Lambda come
   limite ai costi.
-
-## Cosa farei diversamente
-
-- Metterei subito i test end-to-end nel repository. All'inizio ho provato i flussi con script Puppeteer
-  usa e getta; oggi sono otto flussi Playwright in CI e il deploy parte solo se passano.
-- Unirei i conflitti campo per campo: oggi si chiede di scegliere anche quando uno ha cambiato la nota e
-  l'altro l'importo.
-- Genererei i tipi del frontend da un contratto OpenAPI invece di scriverli a mano.
-
