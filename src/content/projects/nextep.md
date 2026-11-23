@@ -46,10 +46,3 @@ su quale servizio si guarda.
   non cambiano più, e fino a 30 giorni come riserva se TMDB non risponde.
 - **Rilasci senza interruzioni.** Le migrazioni girano prima del codice nuovo e devono funzionare anche con
   quello vecchio; il frontend arriva sempre dopo l'API che gli serve.
-
-## Cosa farei diversamente
-
-- Chiederei ad AWS fin dall'inizio di far uscire SES dalla sandbox: finché ci resta, le email di recupero
-  password arrivano solo agli indirizzi verificati.
-- Progetterei da subito per la PWA installata: su iPhone le notifiche push arrivano solo con l'app nella
-  schermata Home, e va spiegato all'utente.

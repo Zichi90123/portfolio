@@ -58,10 +58,3 @@ i giocatori già osservati.
   1.009 valutazioni a stelle del gioco.
 - **Un plugin che la CI non può compilare**, perché servono le librerie di FM26: in CI si controllano il
   catalogo dei ruoli e la coerenza delle versioni, la release si pubblica da locale.
-
-## Cosa farei diversamente
-
-- Misurerei prima sul rendimento reale. Il primo punteggio si basava solo sull'aderenza al ruolo, e solo il
-  confronto con le medie voto ha mostrato che la CA conta di più.
-- Proverei le regole economiche su budget molto diversi: il primo costo del denaro, una cifra fissa per
-  milione, con budget alti escludeva quasi ogni titolare; ora è relativo al budget.

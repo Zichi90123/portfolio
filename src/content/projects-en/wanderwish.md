@@ -40,12 +40,3 @@ what weather you will find, and neither of them remembers what you looked up.
   them on startup, safely even when several services start together on the same schema.
 - **Caching where it counts.** One comparison asks Open-Meteo for 30 years of data: every combination of
   city, month and language stays cached in Redis. Exchange rates are refreshed by an hourly job.
-
-## What I would do differently
-
-- I would explain what the site does first and the style second: today the home page tells the mood before
-  the tools.
-- I would connect the modules from the start with a shared "Trip" object, so destination and dates are
-  entered once instead of in every tool.
-- I would plan for cold starts from day one: on Render's free tier an idle service can take almost a minute
-  to answer the first request.

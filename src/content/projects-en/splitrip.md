@@ -34,11 +34,3 @@ how much they really spent, or who owes what to whom.
 - **The same maths in two languages.** Splits and balances are computed both in Go (API) and in TypeScript
   (offline preview): a shared set of test cases, run by both test suites, keeps them in line.
 - **Zero euros a month.** Everything fits in free tiers, with a cap on Lambda concurrency as a cost limit.
-
-## What I would do differently
-
-- I would put end-to-end tests in the repository from the start. At first I tried the flows with throwaway
-  Puppeteer scripts; today there are eight Playwright flows in CI, and the deploy only starts if they pass.
-- I would merge conflicts field by field: today you are asked to choose even when one person changed the
-  note and the other the amount.
-- I would generate the frontend types from an OpenAPI contract instead of writing them by hand.

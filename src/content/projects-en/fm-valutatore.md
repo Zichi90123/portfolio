@@ -47,10 +47,3 @@ already been scouted.
   1,009 of the game's star ratings.
 - **A plugin that CI cannot build**, because it needs FM26's libraries: CI checks the role catalogue and
   version consistency, and releases are published from a local machine.
-
-## What I would do differently
-
-- I would measure against real performance first. The first score was based on role fit alone, and only the
-  comparison with match ratings showed that CA matters more.
-- I would test the economic rules on very different budgets: the first cost of money, a fixed amount per
-  million, ruled out almost every starter with large budgets; it is now relative to the budget.

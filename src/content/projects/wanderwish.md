@@ -50,11 +50,3 @@ un sito meteo per capire che tempo troverai, e nessuno dei due ricorda cosa avev
   container all'avvio, in modo sicuro anche quando più servizi partono insieme sullo stesso schema.
 - **Cache dove serve.** Un confronto chiede 30 anni di dati a Open-Meteo: ogni combinazione di città, mese e
   lingua resta in cache su Redis. I tassi di cambio si aggiornano con un job orario.
-
-## Cosa farei diversamente
-
-- Spiegherei prima cosa fa il sito e poi lo stile: oggi la home racconta l'atmosfera prima degli strumenti.
-- Collegherei i moduli fin dall'inizio con un oggetto "Viaggio" condiviso, così meta e date si scrivono una
-  volta sola invece che in ogni strumento.
-- Terrei conto da subito degli avvii a freddo: sul piano gratuito di Render un servizio inattivo può
-  impiegare quasi un minuto a rispondere alla prima richiesta.

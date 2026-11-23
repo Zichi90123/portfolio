@@ -29,7 +29,7 @@ animazioni pesanti.
 |---|---|
 | Home | Nome, una frase su chi sono e cosa cerco, 3 progetti in evidenza, link a CV, GitHub, LinkedIn |
 | Progetti | Griglia con anteprima, tecnologie e filtri (web, mobile, giochi) |
-| Scheda progetto | Video o GIF, problema, tecnologie, scelte tecniche, difficoltà, cosa farei diversamente, link a demo e codice |
+| Scheda progetto | Video o GIF, problema, tecnologie, scelte tecniche, difficoltà, link a demo e codice |
 | Articoli | Note tecniche collegate ai progetti |
 | Chi sono | Percorso, competenze per livello, cosa sto imparando |
 | CV e contatti | CV in PDF, email, GitHub, LinkedIn |
